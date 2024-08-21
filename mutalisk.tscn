@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://civsuvsgp20pm"]
+
+[ext_resource type="Texture2D" uid="uid://dtk5bbse6ukb1" path="res://images/icon.svg" id="1_awh6y"]
+[ext_resource type="Script" path="res://mutalisk.gd" id="1_yhpyk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ma1tt"]
+size = Vector2(128, 128)
+
+[sub_resource type="GDScript" id="GDScript_trayi"]
+script/source = "extends CollisionShape2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
+
+[node name="Monster" type="CharacterBody2D" groups=["monsters"]]
+scale = Vector2(0.3, 0.3)
+collision_layer = 4
+collision_mask = 22
+script = ExtResource("1_yhpyk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1.90735e-06, 0)
+texture = ExtResource("1_awh6y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ma1tt")
+script = SubResource("GDScript_trayi")
+
+[node name="FindClosestShipTimer" type="Timer" parent="."]
+wait_time = 0.4
+
+[connection signal="timeout" from="FindClosestShipTimer" to="." method="_on_find_closest_ship_timer_timeout"]

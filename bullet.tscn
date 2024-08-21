@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4r4u3tswv6lk"]
+
+[ext_resource type="Script" path="res://bullet.gd" id="1_lf3vf"]
+[ext_resource type="Texture2D" uid="uid://jf23qkkinbm2" path="res://kenney_abstract-platformer/PNG/Items/redGem.png" id="1_vudmx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m8vgr"]
+radius = 8.0
+
+[node name="Bullet" type="Area2D"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_lf3vf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_m8vgr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 2.38419e-07)
+scale = Vector2(0.727273, 0.727273)
+texture = ExtResource("1_vudmx")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="LifespanTimer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="timeout" from="LifespanTimer" to="." method="_on_lifespan_timer_timeout"]

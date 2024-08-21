@@ -1,0 +1,199 @@
+[gd_scene load_steps=4 format=3 uid="uid://c01h46ht3earx"]
+
+[ext_resource type="Script" path="res://hud.gd" id="1_4w35r"]
+[ext_resource type="LabelSettings" uid="uid://d36tdyhal06tm" path="res://upgrade_label_settings.tres" id="2_kck8y"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_8jl4s"]
+font_size = 62
+font_color = Color(0.890196, 0.109804, 0.152941, 1)
+
+[node name="HUD" type="CanvasLayer"]
+process_mode = 2
+script = ExtResource("1_4w35r")
+
+[node name="HpLabel" type="Label" parent="."]
+offset_left = 552.0
+offset_right = 626.0
+offset_bottom = 23.0
+text = "HP: 30/30"
+
+[node name="ExpLabel" type="Label" parent="."]
+offset_left = 1056.0
+offset_right = 1152.0
+offset_bottom = 24.0
+text = "0/600"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LevelLabel" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -96.0
+offset_top = 24.0
+offset_bottom = 48.0
+grow_horizontal = 0
+text = "Level 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CrashesLabel" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -96.0
+offset_top = 48.0
+offset_right = -1.0
+offset_bottom = 71.0
+grow_horizontal = 0
+text = "Crashes: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CheckButton" type="CheckButton" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -233.0
+offset_top = -31.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Navigation debug mode"
+
+[node name="ShipTimeoutLabel" type="Label" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -128.0
+offset_top = -48.0
+offset_right = -3.0
+offset_bottom = -25.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Ship timeout: 1s"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UpgradeSelection" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="UpgradeLabel" type="Label" parent="UpgradeSelection"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = -100.0
+offset_right = 78.0
+offset_bottom = -77.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Choose an upgrade"
+label_settings = ExtResource("2_kck8y")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UpgradeOption1" type="Button" parent="UpgradeSelection"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -55.0
+offset_top = -60.0
+offset_right = 55.0
+offset_bottom = -29.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Bigger light beam radius"
+
+[node name="UpgradeOption2" type="Button" parent="UpgradeSelection"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -55.0
+offset_top = -15.5
+offset_right = 55.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Change light beam speed"
+
+[node name="UpgradeOption3" type="Button" parent="UpgradeSelection"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -55.0
+offset_top = 28.0
+offset_right = 55.0
+offset_bottom = 59.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Plant lantern"
+
+[node name="UpgradeOption4" type="Button" parent="UpgradeSelection"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -55.0
+offset_top = 71.5
+offset_right = 55.0
+offset_bottom = 102.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Faster projectiles"
+
+[node name="UpgradeOption5" type="Button" parent="UpgradeSelection"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = 116.0
+offset_right = 71.0
+offset_bottom = 147.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "More projectiles"
+
+[node name="UpgradeOption6" type="Button" parent="UpgradeSelection"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -74.5
+offset_top = 158.0
+offset_right = 75.5
+offset_bottom = 189.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Double light beam"
+
+[node name="GameOverLabel" type="Label" parent="."]
+visible = false
+offset_left = 416.0
+offset_top = 256.0
+offset_right = 753.0
+offset_bottom = 342.0
+text = "Game Over"
+label_settings = SubResource("LabelSettings_8jl4s")
+
+[connection signal="button_up" from="UpgradeSelection/UpgradeOption1" to="." method="_on_upgrade_option_1_button_up"]
+[connection signal="button_up" from="UpgradeSelection/UpgradeOption2" to="." method="_on_upgrade_option_2_button_up"]
+[connection signal="button_up" from="UpgradeSelection/UpgradeOption3" to="." method="_on_upgrade_option_3_button_up"]
+[connection signal="button_up" from="UpgradeSelection/UpgradeOption4" to="." method="_on_upgrade_option_4_button_up"]
+[connection signal="button_up" from="UpgradeSelection/UpgradeOption5" to="." method="_on_upgrade_option_5_button_up"]
+[connection signal="button_up" from="UpgradeSelection/UpgradeOption6" to="." method="_on_upgrade_option_6_button_up"]
