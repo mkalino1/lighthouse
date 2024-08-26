@@ -8,7 +8,7 @@ var monster_type
 var ship
 
 func _ready():
-	monster_type = MONSTER_TYPE.values()[randi() % MONSTER_TYPE.size()]
+	monster_type = MONSTER_TYPE.values().pick_random()
 	match monster_type:
 		MONSTER_TYPE.SHIPPER:
 			find_closes_ship()

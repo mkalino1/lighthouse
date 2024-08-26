@@ -31,9 +31,6 @@ var back_bullet = false
 
 func _ready():
 	inital_light_beam_position = $RotationPoint/LightBeam.position;
-	#second_beam = light_beam_scene.instantiate()
-	#second_beam.position = Vector2(-250, 0)
-	#$RotationPoint.add_child(second_beam)
 	
 func shoot():
 	if bullet_cooldown_block:
@@ -93,19 +90,24 @@ func _physics_process(delta):
 	$RotationPoint/LightBeam.position = inital_light_beam_position * offcenter_angle/10
 	#$RotationPoint/LightBeam.global_position = position.move_toward($RotationPoint.global_position, 1)
 	$RotationPoint.rotation += angle_speed * delta * direction * penalty
-
+	
+func _on_bullet_cooldown_timer_timeout():
+	bullet_cooldown_block = false
+	
 #***UPGRADES***
 func increase_beam_scale():
 	$RotationPoint/LightBeam.increase_scale(beam_scale_increment)
 
 func increase_angle_speed():
 	angle_speed += angle_speed_increment
-
-func _on_bullet_cooldown_timer_timeout():
-	bullet_cooldown_block = false
 	
 func increase_bullet_speed():
 	bullet_speed += bullet_speed_increment
 	
 func increase_bullet_quantity():
 	bullet_quantity += bullet_quantity_increment
+	
+func add_second_beam():
+	var second_beam = light_beam_scene.instantiate()
+	second_beam.position = Vector2(-250, 0)
+	$RotationPoint.add_child(second_beam)

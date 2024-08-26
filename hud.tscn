@@ -155,6 +155,7 @@ grow_vertical = 2
 text = "Faster projectiles"
 
 [node name="UpgradeOption5" type="Button" parent="UpgradeSelection"]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -169,6 +170,7 @@ grow_vertical = 2
 text = "More projectiles"
 
 [node name="UpgradeOption6" type="Button" parent="UpgradeSelection"]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
