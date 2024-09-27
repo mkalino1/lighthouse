@@ -7,6 +7,8 @@ extends Node
 var wind_direction: Vector2 = Vector2.UP
 var exp = 0
 var level = 1
+var wave = 1
+var wave_pause = false
 var crashes = 0
 var max_ship_count = 3
 var max_monster_count = 6
@@ -24,7 +26,6 @@ func add_exp(exp_to_add):
 		exp -= exp_per_level(level)
 		level += 1
 		max_ship_count += 1
-		max_monster_count += 2
 		$Timers/ShipSpawnTimer.wait_time *= 0.9
 		$HUD.update_ship_timeout_label($Timers/ShipSpawnTimer.wait_time)
 		$HUD.update_level_label(level)
@@ -55,7 +56,7 @@ func spawn_ship():
 	add_child(ship)
 	
 func spawn_mutalisk():
-	if get_tree().get_nodes_in_group("monsters").size() >= max_monster_count:
+	if wave_pause or get_tree().get_nodes_in_group("monsters").size() >= max_monster_count:
 		return
 	var mutalisk = mutalisk_scene.instantiate()
 	var side = randi() % 2 == 0
@@ -73,3 +74,15 @@ func spawn_lantern(position):
 	
 func _on_wind_change_timer_timeout():
 	wind_direction = wind_direction.rotated(randf_range(-0.3, 0.3))
+
+func _on_wave_timer_timeout():
+	wave_pause = true
+	$Timers/WavePauseTimer.start()
+
+func _on_wave_pause_timer_timeout():
+	wave_pause = false
+	wave += 1
+	$HUD.update_wave_label(wave)
+	max_monster_count += 6
+	$Timers/MutaliskSpawnTimer.wait_time *= 0.8
+	$Timers/WaveTimer.start()

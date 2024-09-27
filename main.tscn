@@ -12916,6 +12916,15 @@ autostart = true
 [node name="MutaliskSpawnTimer" type="Timer" parent="Timers"]
 autostart = true
 
+[node name="WaveTimer" type="Timer" parent="Timers"]
+wait_time = 20.0
+one_shot = true
+autostart = true
+
+[node name="WavePauseTimer" type="Timer" parent="Timers"]
+wait_time = 5.0
+one_shot = true
+
 [node name="Paths" type="Node" parent="."]
 
 [node name="ShipSpawnPath" type="Path2D" parent="Paths"]
@@ -12956,3 +12965,5 @@ progress = 481.15
 [connection signal="timeout" from="Timers/ShipSpawnTimer" to="." method="spawn_ship"]
 [connection signal="timeout" from="Timers/WindChangeTimer" to="." method="_on_wind_change_timer_timeout"]
 [connection signal="timeout" from="Timers/MutaliskSpawnTimer" to="." method="spawn_mutalisk"]
+[connection signal="timeout" from="Timers/WaveTimer" to="." method="_on_wave_timer_timeout"]
+[connection signal="timeout" from="Timers/WavePauseTimer" to="." method="_on_wave_pause_timer_timeout"]

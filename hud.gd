@@ -65,15 +65,18 @@ func update_hp_label(hp):
 
 func update_exp_label(exp, exp_level):
 	$ExpLabel.text = str(exp) + '/' + str(exp_level)
-	
+
 func update_level_label(level):
 	$LevelLabel.text = 'Level: ' + str(level)
-	
+
 func update_crashes_label(crashes):
 	$CrashesLabel.text = 'Crashes: ' + str(crashes)	
-	
+
 func update_ship_timeout_label(timeout):
-	$ShipTimeoutLabel.text = 'Ship timeout: ' + str(snappedf(timeout, 0.01)) + 's'	
+	$ShipTimeoutLabel.text = 'Ship timeout: ' + str(snappedf(timeout, 0.01)) + 's'
+
+func update_wave_label(wave_number):
+	$WaveLabel.text = 'Wave: ' + str(wave_number)
 
 #UPGRADES
 func _on_upgrade_option_1_button_up():
