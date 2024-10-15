@@ -19,13 +19,13 @@ var current_upgrades_choice
 	},
 	{
 		'name': 'Increase bullet speed',
-		'function': get_node("../Lighthouse").increase_bullet_speed,
+		'function': get_node("../Player").increase_bullet_speed,
 		'building': false,
 		'onetime': false,
 	},
 	{
 		'name': 'Increase bullet quantity',
-		'function': get_node("../Lighthouse").increase_bullet_quantity,
+		'function': get_node("../Player").increase_bullet_quantity,
 		'building': false,
 		'onetime': false,
 	},

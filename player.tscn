@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bg0eco355xata"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_dpbys"]
+[ext_resource type="Texture2D" uid="uid://vg88oym2q14n" path="res://images/playerGreen_up2.png" id="2_djdck"]
+[ext_resource type="PackedScene" uid="uid://b4r4u3tswv6lk" path="res://bullet.tscn" id="2_xprj7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gw4v6"]
+radius = 40.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_dpbys")
+bullet_scene = ExtResource("2_xprj7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-2.6226e-06, 0)
+scale = Vector2(2.10526, 1.86047)
+texture = ExtResource("2_djdck")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_gw4v6")
+
+[node name="BulletCooldownTimer" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
+
+[node name="BulletsDelayTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="timeout" from="BulletCooldownTimer" to="." method="_on_bullet_cooldown_timer_timeout"]
