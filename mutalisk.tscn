@@ -23,7 +23,7 @@ func _process(delta):
 [node name="Monster" type="CharacterBody2D" groups=["monsters"]]
 scale = Vector2(0.3, 0.3)
 collision_layer = 4
-collision_mask = 22
+collision_mask = 54
 script = ExtResource("1_yhpyk")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

@@ -37,7 +37,6 @@ func _physics_process(delta):
 	move_and_slide()
 
 func shoot():
-	print("trying to shoot")
 	if bullet_cooldown_block:
 		return
 	bullet_cooldown_block = true

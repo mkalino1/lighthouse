@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://b4r4u3tswv6lk"]
+[gd_scene load_steps=5 format=3 uid="uid://b4r4u3tswv6lk"]
 
 [ext_resource type="Script" path="res://bullet.gd" id="1_lf3vf"]
 [ext_resource type="Texture2D" uid="uid://jf23qkkinbm2" path="res://kenney_abstract-platformer/PNG/Items/redGem.png" id="1_vudmx"]
+[ext_resource type="PackedScene" uid="uid://e2doq6tx4m83" path="res://exp_coin.tscn" id="2_4ngyb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m8vgr"]
 radius = 8.0
@@ -10,6 +11,7 @@ radius = 8.0
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("1_lf3vf")
+exp_coin_scene = ExtResource("2_4ngyb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_m8vgr")
