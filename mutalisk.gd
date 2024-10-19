@@ -38,7 +38,7 @@ func _physics_process(delta):
 		if collider.is_in_group("lighthouse"):
 			get_parent().change_hp()
 			queue_free()
-			
+				
 func get_destination():
 	match monster_type:
 		MONSTER_TYPE.SHIPPER:
