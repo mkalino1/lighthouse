@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://dwojl4m0pjaod"]
+
+[ext_resource type="Script" path="res://pulsator.gd" id="1_2mt0g"]
+[ext_resource type="Texture2D" uid="uid://d1yherbdf0hk1" path="res://images/discGreen.png" id="2_4uu4u"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_re5u4"]
+radius = 192.167
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s6shf"]
+radius = 96.3328
+
+[node name="Pulsator" type="Area2D"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_2mt0g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_re5u4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.313726)
+position = Vector2(3.8147e-06, -1.71661e-05)
+scale = Vector2(11.2941, 10.9714)
+texture = ExtResource("2_4uu4u")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -32.0
+offset_top = 32.0
+offset_right = 32.0
+offset_bottom = 64.0
+
+[node name="CooldownTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="TriggerRing" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerRing"]
+shape = SubResource("CircleShape2D_s6shf")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]
+[connection signal="area_entered" from="TriggerRing" to="." method="_on_trigger_ring_area_entered"]
+[connection signal="body_entered" from="TriggerRing" to="." method="_on_trigger_ring_body_entered"]

@@ -1,12 +1,12 @@
 extends StaticBody2D
 
 #BEAM
-const beam_scale_increment = Vector2(0.2, 0.2)
+const beam_scale_increment = Vector2(0.4, 0.4)
 #Rotation
 const offcenter_angle_initial = 10
 const offcenter_angle_max = 10
 const offcenter_angle_min = 3
-const angle_speed_increment = 0.5
+const angle_speed_increment = 1
 
 @export var light_beam_scene: PackedScene
 

@@ -7,7 +7,7 @@ const player_speed = 300
 const player_dash_speed = 800
 #BULLETS
 const bullet_spped_initial = 800
-const bullet_speed_increment = 200
+const bullet_speed_increment = 400
 const bullet_quantity_increment = 1
 
 #Bullets
@@ -17,6 +17,7 @@ var bullet_quantity = 1
 var back_bullet = false
 #Player mobility
 var player_is_dashing = false
+var charge_ability = false
 
 func _input(event):
 	if event.is_action_pressed("shoot"):
@@ -44,7 +45,7 @@ func _physics_process(delta):
 			velocity = velocity * player_speed
 		
 	var collided = move_and_slide()
-	if collided and player_is_dashing:
+	if collided and charge_ability and player_is_dashing:
 		var collision = get_last_slide_collision()
 		var collider = collision.get_collider()
 		if collider.is_in_group("monsters") or collider.is_in_group("ships"):
@@ -72,11 +73,14 @@ func shoot():
 func _on_bullet_cooldown_timer_timeout():
 	bullet_cooldown_block = false
 
+func _on_dash_timer_timeout():
+	player_is_dashing = false
+	
 func increase_bullet_speed():
 	bullet_speed += bullet_speed_increment
 	
 func increase_bullet_quantity():
 	bullet_quantity += bullet_quantity_increment
-
-func _on_dash_timer_timeout():
-	player_is_dashing = false
+	
+func enable_charge_ability():
+	charge_ability = true

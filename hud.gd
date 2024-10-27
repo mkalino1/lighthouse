@@ -1,6 +1,9 @@
 extends CanvasLayer
 
-var lantern_picking_mode = false
+var component_planting_mode = false
+var component_to_plant = null
+
+enum PLANT_COMPONENT_TYPE {LANTERN, PULSATOR}
 
 var current_upgrades_choice
 
@@ -31,13 +34,25 @@ var current_upgrades_choice
 	},
 	{
 		'name': 'Plant lantern',
-		'function': enter_lantern_picking_mode,
+		'function': enter_planting_mode(PLANT_COMPONENT_TYPE.LANTERN),
+		'building': true,
+		'onetime': false,
+	},
+	{
+		'name': 'Plant pulsator',
+		'function': enter_planting_mode(PLANT_COMPONENT_TYPE.PULSATOR),
 		'building': true,
 		'onetime': false,
 	},
 	{
 		'name': 'Add second beam',
 		'function': get_node("../Lighthouse").add_second_beam,
+		'building': false,
+		'onetime': true,
+	},
+	{
+		'name': 'Add charge ability',
+		'function': get_node("../Player").enable_charge_ability,
 		'building': false,
 		'onetime': true,
 	},
@@ -70,7 +85,7 @@ func update_level_label(level):
 	$LevelLabel.text = 'Level: ' + str(level)
 
 func update_crashes_label(crashes):
-	$CrashesLabel.text = 'Crashes: ' + str(crashes)	
+	$CrashesLabel.text = 'Lost ships: ' + str(crashes)	
 
 func update_ship_timeout_label(timeout):
 	$ShipTimeoutLabel.text = 'Ship timeout: ' + str(snappedf(timeout, 0.01)) + 's'
@@ -102,20 +117,24 @@ func handle_upgrade_click(index):
 func close_upgrade_selection():
 	get_tree().paused = false
 	$UpgradeSelection.hide()
-
-func enter_lantern_picking_mode():
-	lantern_picking_mode = true
-	$UpgradeSelection.hide()
+	
+func enter_planting_mode(component):
+	return func ():
+		component_planting_mode = true
+		component_to_plant = component
+		$UpgradeSelection.hide()
 	
 func _input(event):
 	#local_click = get_viewport().canvas_transform.affine_inverse().xform(event.position)
 	#var tile = get_node("../NavigationRegion2D/TileMap").get_cell_atlas_coords(0, event.position)
 	#print(tile) event.local_postion
-	if lantern_picking_mode and event is InputEventMouseButton and is_on_tile_map():
-		#if not is_on_tile_map():
-			#return
-		get_parent().spawn_lantern(event.position)
-		lantern_picking_mode = false
+	if component_planting_mode and event is InputEventMouseButton and is_on_tile_map():
+		match component_to_plant:
+			PLANT_COMPONENT_TYPE.LANTERN:
+				get_parent().spawn_lantern(event.position)
+			PLANT_COMPONENT_TYPE.PULSATOR:
+				get_parent().spawn_pulsator(event.position)
+		component_planting_mode = false
 		get_tree().paused = false
 
 func is_on_tile_map():

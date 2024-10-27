@@ -46,7 +46,7 @@ offset_top = 48.0
 offset_right = -1.0
 offset_bottom = 71.0
 grow_horizontal = 0
-text = "Crashes: 0"
+text = "Lost ships: 0"
 horizontal_alignment = 1
 vertical_alignment = 1
 

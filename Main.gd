@@ -3,6 +3,7 @@ extends Node
 @export var ship_scene: PackedScene
 @export var mutalisk_scene: PackedScene
 @export var light_beam_scene: PackedScene
+@export var pulsator_scene: PackedScene
 
 var wind_direction: Vector2 = Vector2.UP
 var exp = 0
@@ -71,6 +72,11 @@ func spawn_lantern(position):
 	lantern.position = position
 	lantern.placed_on_ground = true
 	add_child(lantern)
+	
+func spawn_pulsator(position):
+	var pulsator = pulsator_scene.instantiate()
+	pulsator.position = position
+	add_child(pulsator)
 	
 func _on_wind_change_timer_timeout():
 	wind_direction = wind_direction.rotated(randf_range(-0.3, 0.3))
