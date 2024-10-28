@@ -50,6 +50,7 @@ func _physics_process(delta):
 		var collider = collision.get_collider()
 		if collider.is_in_group("monsters") or collider.is_in_group("ships"):
 			collider.queue_free()
+			get_parent().add_exp(20)
 
 func shoot():
 	if bullet_cooldown_block:

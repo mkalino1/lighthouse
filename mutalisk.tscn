@@ -37,4 +37,9 @@ script = SubResource("GDScript_trayi")
 [node name="FindClosestShipTimer" type="Timer" parent="."]
 wait_time = 0.4
 
+[node name="PushbackTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
 [connection signal="timeout" from="FindClosestShipTimer" to="." method="_on_find_closest_ship_timer_timeout"]
+[connection signal="timeout" from="PushbackTimer" to="." method="_on_pushback_timer_timeout"]

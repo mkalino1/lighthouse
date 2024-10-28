@@ -6,6 +6,8 @@ const SPEED = 60.0
 
 var monster_type
 var ship
+var push_back_mode = false
+var push_back_direction = Vector2.ZERO
 
 func _ready():
 	monster_type = MONSTER_TYPE.values().pick_random()
@@ -27,7 +29,11 @@ func _physics_process(delta):
 	if not destination:
 		return
 	look_at(destination)
-	velocity = global_position.direction_to(destination) * SPEED
+	if not push_back_mode:
+		velocity = global_position.direction_to(destination) * SPEED
+	else:
+		var time_left_percentage = $PushbackTimer.time_left / $PushbackTimer.wait_time
+		velocity = push_back_direction * sin(time_left_percentage * PI * 0.5) * SPEED * 5
 	var collision = move_and_collide(velocity * delta)
 	if collision:
 		var collider = collision.get_collider()
@@ -56,6 +62,15 @@ func light_entered():
 	
 func light_exited():
 	pass
+	
+func be_pushed_back(direction):
+	push_back_mode = true
+	push_back_direction = direction
+	$PushbackTimer.start()
+
+func _on_pushback_timer_timeout():
+	push_back_mode = false
+	push_back_direction = Vector2.ZERO
 
 func find_closes_ship():
 	var all_ships = get_tree().get_nodes_in_group("ships").filter(func(ship): return not ship.wrecked)

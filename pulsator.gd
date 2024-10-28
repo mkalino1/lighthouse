@@ -6,7 +6,10 @@ func _ready():
 	pass # Replace with function body.
 
 func _process(delta):
-	$Label.text = str($CooldownTimer.time_left).substr(0, 3)
+	if $CooldownTimer.time_left == 0:
+		$Label.text = ''
+	else:
+		$Label.text = str($CooldownTimer.time_left).substr(0, 3)
 
 func _on_cooldown_timer_timeout():
 	if not $TriggerRing.has_overlapping_bodies():
@@ -22,6 +25,6 @@ func pushback_monsters():
 	is_cooldown = true
 	var monsters = get_overlapping_bodies()
 	for monster in monsters:
-		var target = monster.position - position
-		monster.position += target.normalized() * 100;
+		var direction = (monster.position - position).normalized()
+		monster.be_pushed_back(direction)
 	$CooldownTimer.start()
