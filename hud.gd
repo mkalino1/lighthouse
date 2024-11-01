@@ -129,13 +129,18 @@ func _input(event):
 	#var tile = get_node("../NavigationRegion2D/TileMap").get_cell_atlas_coords(0, event.position)
 	#print(tile) event.local_postion
 	if component_planting_mode and event is InputEventMouseButton and is_on_tile_map():
+		var global_click_position = get_global_click_position(event)
 		match component_to_plant:
 			PLANT_COMPONENT_TYPE.LANTERN:
-				get_parent().spawn_lantern(event.position)
+				get_parent().spawn_lantern(global_click_position)
 			PLANT_COMPONENT_TYPE.PULSATOR:
-				get_parent().spawn_pulsator(event.position)
+				get_parent().spawn_pulsator(global_click_position)
 		component_planting_mode = false
 		get_tree().paused = false
+
+func get_global_click_position(event):
+	var tile_map = get_node("../NavigationRegion/TileMap")
+	return tile_map.get_local_mouse_position()
 
 func is_on_tile_map():
 	var tile_map = get_node("../NavigationRegion/TileMap")

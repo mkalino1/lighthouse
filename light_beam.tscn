@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://light_beam.gd" id="1_neh3a"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0unsp"]
-radius = 200.0
+radius = 240.0
 
 [node name="LightBeam" type="Area2D"]
 scale = Vector2(0.8, 0.8)
@@ -12,8 +12,8 @@ collision_mask = 2
 script = ExtResource("1_neh3a")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(-2.09808e-05, -1.90735e-05)
-scale = Vector2(1.5625, 1.5625)
+position = Vector2(1.90735e-06, 3.8147e-06)
+scale = Vector2(1.875, 1.875)
 energy = 0.5
 texture = ExtResource("1_2kp04")
 

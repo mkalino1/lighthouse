@@ -57,9 +57,5 @@ func _on_light_up_timer_timeout():
 	modulate = Color.WHITE
 	lighted = false
 
-func _on_visible_on_screen_notifier_2d_screen_exited():
-	get_parent().add_exp(100)
-	queue_free()
-
 func _on_crashed_timer_timeout():
 	queue_free()

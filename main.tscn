@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://biag02hdsqcvp"]
+[gd_scene load_steps=17 format=3 uid="uid://biag02hdsqcvp"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_qxl65"]
 [ext_resource type="PackedScene" uid="uid://bu7nd4cflfoby" path="res://ship.tscn" id="2_ti0v4"]
@@ -9,6 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://bg0eco355xata" path="res://player.tscn" id="6_lk0pl"]
 [ext_resource type="Texture2D" uid="uid://cvxig7rhyqpnu" path="res://kenney_abstract-platformer/Tilesheet/tilesheet_complete_2X.png" id="6_pp3sv"]
 [ext_resource type="PackedScene" uid="uid://c01h46ht3earx" path="res://hud.tscn" id="7_elsfr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ghq3d"]
+size = Vector2(1920, 1160)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_6r5oj"]
 vertices = PackedVector2Array(1034, 758, 982, 758, -150, 746, 406, 746, -310, 1238, 298, 938, 650, 874, 1034, 810, 1398, 778, 1450, 778, 1590, 1238, 938, 86, 886, 86, 554, 74, 554, 22, 1430, 694, 1430, 726, 1398, 726, 1162, 714, 1162, 662, 1418, 278, 1366, 278, 1226, 266, 1226, 182, 874, 42, 1046, 10, 1142, 10, 1142, 42, 1142, 118, 1034, 182, 982, 182, 938, 170, 1194, 42, 1514, 650, 1590, -342, 1514, 662, 1514, 470, -150, 394, 22, 362, 86, 362, 86, 394, 982, 810, 650, 822, 598, 874, 298, 886, 1366, 330, 1418, 330, 1462, 470, 1322, 438, 1162, 394, 1162, 342, 1386, 138, 1386, 86, 22, 278, -42, 278, -86, 202, -10, 202, 406, 598, 298, 682, 298, 630, 1462, 650, 1386, 618, 1386, 566, 1322, 490, 1302, 566, 1270, 490, 1078, 342, 554, 330, 1174, 266, 886, 374, 886, 490, 746, 458, 746, 406, -150, 310, -42, 330, 874, -10, 1046, -42, 970, 682, 970, 630, 1078, 662, 1078, 714, 1194, -10, 1302, 22, 1302, 106, 1270, 438, 1098, 426, 1098, 394, 458, 426, 458, 374, 630, 406, 630, 458, 458, 746, 918, 682, 650, 650, 886, 650, 598, 650, 458, 598, 598, 566, 138, 842, 138, 790, 598, 822, 246, 886, 1194, 182, 1194, 118, 1142, 234, 1034, 234, 522, 22, 522, -10, 394, 74, 394, 42, 470, 42, 470, 74, 886, 118, 854, 118, 854, 150, 822, 150, 982, 234, 906, 202, 906, 170, 1174, 234, 554, 246, 1078, 374, 1046, 374, 938, 490, 1046, 426, 714, 406, 714, 342, 662, 342, 662, 406, 502, 330, 394, 458, 394, 426, 266, 406, 234, 406, 234, 342, 170, 342, 170, 310, 74, 310, 74, 202, 106, 202, 106, 150, 74, 150, 74, 86, 138, 42, 42, 86, 42, 54, 10, 54, 10, 42, -10, -10, -10, 22, -42, 22, -42, 106, -10, 106, -86, 150, 22, 202, -118, 150, -118, 118, -150, 202, -150, 170, -138, 170, -138, 202, 22, 330, -202, 202, -202, 310, -202, 342, -234, 342, 138, 394, 138, 362, 150, 362, 150, 394, 182, 394, 182, 458, 1462, 662, 1462, 694, 938, 534, 1302, 618, 938, 630, 918, 650, 886, 534, 650, 566, -234, 650, -202, 650, -202, 746, -278, 778, 246, 938, -150, 938, 86, 842, -150, 886, 1450, 746, 1514, 746, -202, 938, -202, 886, -310, 778, -278, 298, -246, 298, -234, 598, -246, 246, -278, 246, -278, 42, -214, 42, -214, 10, -182, 10, -182, -22, -118, -22, -118, -54, 74, -54, 74, -106, -310, -106, -310, -342, 1354, 86, 1354, 22, 1162, -10, 1162, -42, 842, -10, 842, -74, 790, 10, 822, 10, 822, 42, 1334, 106, 1334, 138, 86, 790, 790, -74, 342, -10, 822, 202, 502, 246, 342, 74, 342, 374, -202, 118, 938, 374, 246, 682, 138, -10, 266, 458, 246, 630, -234, 394, -150, 598, 342, 458)
@@ -12855,7 +12858,7 @@ sources/0 = SubResource("TileSetAtlasSource_8jog0")
 
 [sub_resource type="Curve2D" id="Curve2D_sbc3e"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 1728, 1256, 0, 0, 0, 0, 64, 680)
+"points": PackedVector2Array(0, 0, 0, 0, 1728, 1256, 0, 0, 0, 0, 64, 1256)
 }
 point_count = 2
 
@@ -12893,6 +12896,14 @@ metadata/_edit_lock_ = true
 [node name="CanvasModulate" type="CanvasModulate" parent="ScreenRects"]
 color = Color(0.6, 0.6, 0.6, 1)
 
+[node name="OutOfBounds" type="Area2D" parent="ScreenRects"]
+collision_layer = 0
+collision_mask = 14
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScreenRects/OutOfBounds"]
+position = Vector2(960, 572)
+shape = SubResource("RectangleShape2D_ghq3d")
+
 [node name="Player" parent="." instance=ExtResource("6_lk0pl")]
 position = Vector2(572, 352)
 
@@ -12914,6 +12925,7 @@ position = Vector2(1015, 480)
 [node name="Timers" type="Node" parent="."]
 
 [node name="ShipSpawnTimer" type="Timer" parent="Timers"]
+wait_time = 2.0
 autostart = true
 
 [node name="WindChangeTimer" type="Timer" parent="Timers"]
@@ -12940,8 +12952,8 @@ metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
 [node name="ShipSpawnLocation" type="PathFollow2D" parent="Paths/ShipSpawnPath"]
-position = Vector2(1194.82, 1071.44)
-rotation = -2.80835
+position = Vector2(1163.78, 1256)
+rotation = 3.14159
 progress = 564.224
 
 [node name="ShipDestinationPath" type="Path2D" parent="Paths"]
@@ -12971,6 +12983,8 @@ progress = 481.15
 [node name="Area2D" parent="." instance=ExtResource("5_jtl6w")]
 position = Vector2(753, 488)
 
+[connection signal="area_exited" from="ScreenRects/OutOfBounds" to="." method="_on_out_of_bounds_area_exited"]
+[connection signal="body_exited" from="ScreenRects/OutOfBounds" to="." method="_on_out_of_bounds_body_exited"]
 [connection signal="timeout" from="Timers/ShipSpawnTimer" to="." method="spawn_ship"]
 [connection signal="timeout" from="Timers/WindChangeTimer" to="." method="_on_wind_change_timer_timeout"]
 [connection signal="timeout" from="Timers/MutaliskSpawnTimer" to="." method="spawn_mutalisk"]

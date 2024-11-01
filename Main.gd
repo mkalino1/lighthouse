@@ -11,8 +11,8 @@ var level = 1
 var wave = 1
 var wave_pause = false
 var crashes = 0
-var max_ship_count = 3
-var max_monster_count = 6
+var max_ship_count = 1
+var max_monster_count = 8
 var lighthouse_hp = 30
 
 func change_hp(value = 10, add = false):
@@ -44,10 +44,8 @@ func spawn_ship():
 	if get_tree().get_nodes_in_group("ships").size() >= max_ship_count:
 		return
 	var ship = ship_scene.instantiate()
-	# Choose a random location on Path2D.
 	var ship_spawn_location = $Paths/ShipSpawnPath/ShipSpawnLocation
 	ship_spawn_location.progress_ratio = randf()
-	# Set the mob's direction perpendicular to the path direction.
 	var direction = ship_spawn_location.rotation + PI / 2
 	ship.position = ship_spawn_location.position
 	direction += randf_range(-PI / 16, PI / 16)
@@ -92,3 +90,11 @@ func _on_wave_pause_timer_timeout():
 	max_monster_count += 6
 	$Timers/MutaliskSpawnTimer.wait_time *= 0.8
 	$Timers/WaveTimer.start()
+
+func _on_out_of_bounds_body_exited(body):
+	if body.is_in_group('ships'):
+		add_exp(300)
+	body.queue_free()
+
+func _on_out_of_bounds_area_exited(area):
+	area.queue_free()

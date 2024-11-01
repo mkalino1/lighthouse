@@ -11,7 +11,7 @@ const angle_speed_increment = 1
 @export var light_beam_scene: PackedScene
 
 #Rotation
-var angle_speed = 2
+var angle_speed = 1
 var is_rotation_direction_changed = false;
 var is_rotation_direction_change_desired = false;
 var rotation_change_slowdown = false

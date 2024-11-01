@@ -21,13 +21,10 @@ position = Vector2(0, 2.38419e-07)
 scale = Vector2(0.727273, 0.727273)
 texture = ExtResource("1_vudmx")
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-
 [node name="LifespanTimer" type="Timer" parent="."]
 wait_time = 4.0
 one_shot = true
 autostart = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
 [connection signal="timeout" from="LifespanTimer" to="." method="_on_lifespan_timer_timeout"]
