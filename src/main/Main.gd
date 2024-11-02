@@ -5,6 +5,12 @@ extends Node
 @export var light_beam_scene: PackedScene
 @export var pulsator_scene: PackedScene
 
+const MAX_SHIP_INCREMENT = 1
+const MAX_MONSTER_INCREMENT = 6
+const SHIP_SPAWN_MODIFIER = 0.9
+const MONSTER_SPAWN_MODIFIER = 0.8
+const SHIP_SUCCESS_EXP = 300
+
 var wind_direction: Vector2 = Vector2.UP
 var exp = 0
 var level = 1
@@ -15,7 +21,7 @@ var max_ship_count = 1
 var max_monster_count = 8
 var lighthouse_hp = 30
 
-func change_hp(value = 10, add = false):
+func change_hp(value, add = false):
 	lighthouse_hp = lighthouse_hp + value if add else lighthouse_hp - value
 	$HUD.update_hp_label(lighthouse_hp)
 	if lighthouse_hp <= 0:
@@ -26,8 +32,8 @@ func add_exp(exp_to_add):
 	if exp >= exp_per_level(level):
 		exp -= exp_per_level(level)
 		level += 1
-		max_ship_count += 1
-		$Timers/ShipSpawnTimer.wait_time *= 0.9
+		max_ship_count += MAX_SHIP_INCREMENT
+		$Timers/ShipSpawnTimer.wait_time *= SHIP_SPAWN_MODIFIER
 		$HUD.update_ship_timeout_label($Timers/ShipSpawnTimer.wait_time)
 		$HUD.update_level_label(level)
 		$HUD.show_upgrade_selection()
@@ -87,13 +93,13 @@ func _on_wave_pause_timer_timeout():
 	wave_pause = false
 	wave += 1
 	$HUD.update_wave_label(wave)
-	max_monster_count += 6
-	$Timers/MutaliskSpawnTimer.wait_time *= 0.8
+	max_monster_count += MAX_MONSTER_INCREMENT
+	$Timers/MutaliskSpawnTimer.wait_time *= MONSTER_SPAWN_MODIFIER
 	$Timers/WaveTimer.start()
 
 func _on_out_of_bounds_body_exited(body):
 	if body.is_in_group('ships'):
-		add_exp(300)
+		add_exp(SHIP_SUCCESS_EXP)
 	body.queue_free()
 
 func _on_out_of_bounds_area_exited(area):

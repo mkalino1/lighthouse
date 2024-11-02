@@ -1,21 +1,18 @@
 extends StaticBody2D
 
-#BEAM
-const beam_scale_increment = Vector2(0.4, 0.4)
-#Rotation
-const offcenter_angle_initial = 10
-const offcenter_angle_max = 10
-const offcenter_angle_min = 3
-const angle_speed_increment = 1
-
 @export var light_beam_scene: PackedScene
 
-#Rotation
+const BEAM_SCALE_INCREMENT = 0.4
+const ANGLE_SPEED_INCREMENT = 1
+const OFFCENTER_ANGLE_INITIAL = 10
+const OFFCENTER_ANGLE_MAX = 10
+const OFFCENTER_ANGLE_MIN = 3
+
 var angle_speed = 1
 var is_rotation_direction_changed = false;
 var is_rotation_direction_change_desired = false;
 var rotation_change_slowdown = false
-var offcenter_angle = offcenter_angle_initial
+var offcenter_angle = OFFCENTER_ANGLE_INITIAL
 var inital_light_beam_position
 
 func _ready():
@@ -29,9 +26,9 @@ func _input(event):
 	if event is InputEventMouseButton:
 		if event.pressed:
 			if event.button_index == MOUSE_BUTTON_WHEEL_UP:
-				offcenter_angle = clamp(offcenter_angle + 1, offcenter_angle_min, offcenter_angle_max)
+				offcenter_angle = clamp(offcenter_angle + 1, OFFCENTER_ANGLE_MIN, OFFCENTER_ANGLE_MAX)
 			if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-				offcenter_angle = clamp(offcenter_angle - 1, offcenter_angle_min, offcenter_angle_max)
+				offcenter_angle = clamp(offcenter_angle - 1, OFFCENTER_ANGLE_MIN, OFFCENTER_ANGLE_MAX)
 
 func _on_rotation_change_mid_timeout():
 	is_rotation_direction_changed = is_rotation_direction_change_desired
@@ -48,17 +45,20 @@ func _physics_process(delta):
 		var finish_timer_left = $RotationPoint/RotationChangeFinish.time_left
 		penalty = mid_timer_left if mid_timer_left != 0 else (1 - finish_timer_left)
 	$RotationPoint/LightBeam.position = inital_light_beam_position * offcenter_angle/10
-	#$RotationPoint/LightBeam.global_position = position.move_toward($RotationPoint.global_position, 1)
 	$RotationPoint.rotation += angle_speed * delta * direction * penalty
 	
 #***UPGRADES***
 func increase_beam_scale():
-	$RotationPoint/LightBeam.increase_scale(beam_scale_increment)
+	for child in $RotationPoint.get_children():
+		if child.is_in_group('beams'):
+			child.increase_scale(BEAM_SCALE_INCREMENT)
 
 func increase_angle_speed():
-	angle_speed += angle_speed_increment
+	angle_speed += ANGLE_SPEED_INCREMENT
 	
 func add_second_beam():
 	var second_beam = light_beam_scene.instantiate()
-	second_beam.position = Vector2(-250, 0)
+	var first_beam = $RotationPoint/LightBeam
+	second_beam.position = -first_beam.position
+	second_beam.scale = first_beam.scale
 	$RotationPoint.add_child(second_beam)

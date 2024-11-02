@@ -1,21 +1,21 @@
 [gd_scene load_steps=4 format=3 uid="uid://bncfekbrku1uf"]
 
-[ext_resource type="Texture2D" uid="uid://dbi0rgt3f25oj" path="res://images/point_light.webp" id="1_2kp04"]
-[ext_resource type="Script" path="res://light_beam.gd" id="1_neh3a"]
+[ext_resource type="Script" path="res://src/light_beam/light_beam.gd" id="1_s7vkd"]
+[ext_resource type="Texture2D" uid="uid://dbi0rgt3f25oj" path="res://images/point_light.webp" id="2_n37i1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0unsp"]
 radius = 240.0
 
-[node name="LightBeam" type="Area2D"]
+[node name="LightBeam" type="Area2D" groups=["beams"]]
 scale = Vector2(0.8, 0.8)
 collision_mask = 2
-script = ExtResource("1_neh3a")
+script = ExtResource("1_s7vkd")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(1.90735e-06, 3.8147e-06)
 scale = Vector2(1.875, 1.875)
 energy = 0.5
-texture = ExtResource("1_2kp04")
+texture = ExtResource("2_n37i1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_0unsp")

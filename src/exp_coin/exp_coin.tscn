@@ -1,17 +1,17 @@
 [gd_scene load_steps=4 format=3 uid="uid://e2doq6tx4m83"]
 
-[ext_resource type="Script" path="res://ExpCoin.gd" id="1_v81xk"]
-[ext_resource type="Texture2D" uid="uid://boy8vmir8cpfj" path="res://images/greenGem.png" id="2_qx8un"]
+[ext_resource type="Script" path="res://src/exp_coin/exp_coin.gd" id="1_4grkv"]
+[ext_resource type="Texture2D" uid="uid://boy8vmir8cpfj" path="res://images/greenGem.png" id="2_ga3dg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_85rle"]
 
 [node name="ExpCoin" type="Area2D"]
 collision_layer = 32
 collision_mask = 32
-script = ExtResource("1_v81xk")
+script = ExtResource("1_4grkv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_qx8un")
+texture = ExtResource("2_ga3dg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_85rle")

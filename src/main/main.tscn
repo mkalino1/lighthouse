@@ -1,14 +1,14 @@
 [gd_scene load_steps=17 format=3 uid="uid://biag02hdsqcvp"]
 
-[ext_resource type="Script" path="res://Main.gd" id="1_qxl65"]
-[ext_resource type="PackedScene" uid="uid://bu7nd4cflfoby" path="res://ship.tscn" id="2_ti0v4"]
-[ext_resource type="PackedScene" uid="uid://bncfekbrku1uf" path="res://light_beam.tscn" id="3_qacap"]
-[ext_resource type="PackedScene" uid="uid://civsuvsgp20pm" path="res://mutalisk.tscn" id="4_5gn8i"]
-[ext_resource type="PackedScene" uid="uid://bgjquj6c3t8v" path="res://lighthouse.tscn" id="4_81baa"]
-[ext_resource type="PackedScene" uid="uid://dwojl4m0pjaod" path="res://pulsator.tscn" id="5_jtl6w"]
-[ext_resource type="PackedScene" uid="uid://bg0eco355xata" path="res://player.tscn" id="6_lk0pl"]
+[ext_resource type="Script" path="res://src/main/Main.gd" id="1_qxl65"]
+[ext_resource type="PackedScene" uid="uid://bu7nd4cflfoby" path="res://src/ship/ship.tscn" id="2_ti0v4"]
+[ext_resource type="PackedScene" uid="uid://bncfekbrku1uf" path="res://src/light_beam/light_beam.tscn" id="3_qacap"]
+[ext_resource type="PackedScene" uid="uid://civsuvsgp20pm" path="res://src/monster/monster.tscn" id="4_5gn8i"]
+[ext_resource type="PackedScene" uid="uid://bgjquj6c3t8v" path="res://src/lighthouse/lighthouse.tscn" id="4_81baa"]
+[ext_resource type="PackedScene" uid="uid://dwojl4m0pjaod" path="res://src/pulsator/pulsator.tscn" id="5_jtl6w"]
+[ext_resource type="PackedScene" uid="uid://bg0eco355xata" path="res://src/player/player.tscn" id="6_lk0pl"]
 [ext_resource type="Texture2D" uid="uid://cvxig7rhyqpnu" path="res://kenney_abstract-platformer/Tilesheet/tilesheet_complete_2X.png" id="6_pp3sv"]
-[ext_resource type="PackedScene" uid="uid://c01h46ht3earx" path="res://hud.tscn" id="7_elsfr"]
+[ext_resource type="PackedScene" uid="uid://c01h46ht3earx" path="res://src/hud/hud.tscn" id="7_elsfr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ghq3d"]
 size = Vector2(1920, 1160)

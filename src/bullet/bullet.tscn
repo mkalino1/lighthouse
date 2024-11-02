@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://b4r4u3tswv6lk"]
 
-[ext_resource type="Script" path="res://bullet.gd" id="1_lf3vf"]
-[ext_resource type="Texture2D" uid="uid://jf23qkkinbm2" path="res://kenney_abstract-platformer/PNG/Items/redGem.png" id="1_vudmx"]
-[ext_resource type="PackedScene" uid="uid://e2doq6tx4m83" path="res://exp_coin.tscn" id="2_4ngyb"]
+[ext_resource type="Script" path="res://src/bullet/bullet.gd" id="1_bon81"]
+[ext_resource type="PackedScene" uid="uid://e2doq6tx4m83" path="res://src/exp_coin/exp_coin.tscn" id="2_0j4rq"]
+[ext_resource type="Texture2D" uid="uid://jf23qkkinbm2" path="res://kenney_abstract-platformer/PNG/Items/redGem.png" id="3_fe2eb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m8vgr"]
 radius = 8.0
@@ -10,8 +10,8 @@ radius = 8.0
 [node name="Bullet" type="Area2D"]
 collision_layer = 0
 collision_mask = 4
-script = ExtResource("1_lf3vf")
-exp_coin_scene = ExtResource("2_4ngyb")
+script = ExtResource("1_bon81")
+exp_coin_scene = ExtResource("2_0j4rq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_m8vgr")
@@ -19,7 +19,7 @@ shape = SubResource("CircleShape2D_m8vgr")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 2.38419e-07)
 scale = Vector2(0.727273, 0.727273)
-texture = ExtResource("1_vudmx")
+texture = ExtResource("3_fe2eb")
 
 [node name="LifespanTimer" type="Timer" parent="."]
 wait_time = 4.0

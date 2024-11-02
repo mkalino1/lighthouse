@@ -1,8 +1,10 @@
 extends CharacterBody2D
 
-const movement_speed: float = 150.0
+const MOVEMENT_SPEED = 150.0
+const SHIP_LIGHTENED_COLOR = Color(0.249, 0.883, 0.441)
+const NON_LIGHTENED_MODIFIER = 0.3
 
-var movement_target_position: Vector2 = Vector2.ZERO
+var movement_target_position = Vector2.ZERO
 var lighted = false
 var wrecked = false
 
@@ -25,26 +27,17 @@ func _physics_process(delta):
 		return
 	var next_path_position: Vector2 = navigation_agent.get_next_path_position()
 	if lighted:
-		velocity = global_position.direction_to(next_path_position) * movement_speed
-		#velocity = velocity.lerp(direction * speed, accel * delta)
+		velocity = global_position.direction_to(next_path_position) * MOVEMENT_SPEED
 	else:
-		#var direction = global_position.direction_to(next_path_position) * 7 + get_parent().wind_direction * 3
 		var direction = global_position.direction_to(next_path_position)
-		velocity = direction.normalized() * movement_speed * 0.3
+		velocity = direction.normalized() * MOVEMENT_SPEED * NON_LIGHTENED_MODIFIER
 	var collided = move_and_slide()
-	#if collided and not lighted:
-		#$LightUpTimer.stop()
-		#modulate = Color(0.849, 0.383, 0.241)
-		#wrecked = true
-		#lighted = false
-		#get_parent().add_crash()
-		#$CrashedTimer.start()
 
 func light_entered():
 	if wrecked:
 		return
 	$LightUpTimer.stop()
-	modulate = Color(0.249, 0.883, 0.441)
+	modulate = SHIP_LIGHTENED_COLOR
 	lighted = true
 	
 func light_exited():
@@ -53,7 +46,6 @@ func light_exited():
 	$LightUpTimer.start()
 
 func _on_light_up_timer_timeout():
-	#modulate = Color(0.549, 0.583, 0.141)
 	modulate = Color.WHITE
 	lighted = false
 

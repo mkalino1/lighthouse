@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://bgjquj6c3t8v"]
 
-[ext_resource type="Script" path="res://lighthouse.gd" id="1_j0xlo"]
+[ext_resource type="Script" path="res://src/lighthouse/lighthouse.gd" id="1_j0xlo"]
 [ext_resource type="Texture2D" uid="uid://0vyvqhk03lud" path="res://images/lighthouse.png" id="1_uopoq"]
-[ext_resource type="PackedScene" uid="uid://bncfekbrku1uf" path="res://light_beam.tscn" id="3_7wmhv"]
+[ext_resource type="PackedScene" uid="uid://bncfekbrku1uf" path="res://src/light_beam/light_beam.tscn" id="3_7wmhv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r5is8"]
 size = Vector2(40, 128)

@@ -2,9 +2,6 @@ extends Area2D
 
 var is_cooldown = false
 
-func _ready():
-	pass # Replace with function body.
-
 func _process(delta):
 	if $CooldownTimer.time_left == 0:
 		$Label.text = ''

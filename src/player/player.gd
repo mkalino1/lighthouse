@@ -3,16 +3,17 @@ extends CharacterBody2D
 @export var bullet_scene: PackedScene
 
 #PLAYER MOBILITY
-const player_speed = 300
-const player_dash_speed = 800
+const PLAYER_SPEED = 300
+const PLAYER_DASH_SPEED = 800
+const EXP_FOR_KILLING_MONSTER = 20
 #BULLETS
-const bullet_spped_initial = 800
-const bullet_speed_increment = 400
-const bullet_quantity_increment = 1
+const BULLET_SPPED_INITIAL = 800
+const BULLET_SPEED_INCREMENT = 400
+const BULLET_QUANTITY_INCREMENT = 1
 
 #Bullets
 var bullet_cooldown_block = false
-var bullet_speed = bullet_spped_initial
+var bullet_speed = BULLET_SPPED_INITIAL
 var bullet_quantity = 1
 var back_bullet = false
 #Player mobility
@@ -40,9 +41,9 @@ func _physics_process(delta):
 	if velocity.length() > 0:
 		velocity = velocity.normalized()
 		if player_is_dashing:
-			velocity = velocity * player_dash_speed
+			velocity = velocity * PLAYER_DASH_SPEED
 		else:
-			velocity = velocity * player_speed
+			velocity = velocity * PLAYER_SPEED
 		
 	var collided = move_and_slide()
 	if collided and charge_ability and player_is_dashing:
@@ -50,7 +51,7 @@ func _physics_process(delta):
 		var collider = collision.get_collider()
 		if collider.is_in_group("monsters") or collider.is_in_group("ships"):
 			collider.queue_free()
-			get_parent().add_exp(20)
+			get_parent().add_exp(EXP_FOR_KILLING_MONSTER)
 
 func shoot():
 	if bullet_cooldown_block:
@@ -58,19 +59,20 @@ func shoot():
 	bullet_cooldown_block = true
 	$BulletCooldownTimer.start()
 	if back_bullet:
-		var bullet = bullet_scene.instantiate()
-		bullet.position = position
-		bullet.speed = -bullet_speed
-		get_parent().add_child(bullet)
+		get_parent().add_child(instantiate_bullet(true))
 	for i in range(bullet_quantity):
-		var bullet = bullet_scene.instantiate()
-		bullet.position = position
-		bullet.speed = bullet_speed
-		get_parent().add_child(bullet)
+		get_parent().add_child(instantiate_bullet())
 		if i != bullet_quantity -1:
 			$BulletsDelayTimer.start()
 			await $BulletsDelayTimer.timeout
-			
+
+func instantiate_bullet(is_back_bullet = false):
+	var bullet = bullet_scene.instantiate()
+	bullet.exp_for_killing_monster = EXP_FOR_KILLING_MONSTER
+	bullet.position = position
+	bullet.speed = bullet_speed if not is_back_bullet else -bullet_speed
+	return bullet
+
 func _on_bullet_cooldown_timer_timeout():
 	bullet_cooldown_block = false
 
@@ -78,10 +80,13 @@ func _on_dash_timer_timeout():
 	player_is_dashing = false
 	
 func increase_bullet_speed():
-	bullet_speed += bullet_speed_increment
+	bullet_speed += BULLET_SPEED_INCREMENT
 	
 func increase_bullet_quantity():
-	bullet_quantity += bullet_quantity_increment
+	bullet_quantity += BULLET_QUANTITY_INCREMENT
 	
 func enable_charge_ability():
 	charge_ability = true
+	
+func enable_back_bullet():
+	back_bullet = true

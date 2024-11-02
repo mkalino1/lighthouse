@@ -1,7 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://c01h46ht3earx"]
+[gd_scene load_steps=5 format=3 uid="uid://c01h46ht3earx"]
 
-[ext_resource type="Script" path="res://hud.gd" id="1_4w35r"]
-[ext_resource type="LabelSettings" uid="uid://d36tdyhal06tm" path="res://upgrade_label_settings.tres" id="2_kck8y"]
+[ext_resource type="Script" path="res://src/hud/hud.gd" id="1_4w35r"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_nd2vw"]
+font_size = 20
+font_color = Color(0.858824, 0.27451, 0.27451, 1)
+
+[sub_resource type="Theme" id="Theme_a3ti5"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_8jl4s"]
 font_size = 62
@@ -95,7 +100,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="UpgradeSelection" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="UpgradeLabel" type="Label" parent="UpgradeSelection"]
 anchors_preset = 8
@@ -110,7 +114,7 @@ offset_bottom = -77.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Choose an upgrade"
-label_settings = ExtResource("2_kck8y")
+label_settings = SubResource("LabelSettings_nd2vw")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -126,6 +130,7 @@ offset_right = 55.0
 offset_bottom = -29.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_a3ti5")
 text = "Bigger light beam radius"
 
 [node name="UpgradeOption2" type="Button" parent="UpgradeSelection"]

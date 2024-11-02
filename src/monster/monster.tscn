@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://civsuvsgp20pm"]
 
 [ext_resource type="Texture2D" uid="uid://dtk5bbse6ukb1" path="res://images/icon.svg" id="1_awh6y"]
-[ext_resource type="Script" path="res://mutalisk.gd" id="1_yhpyk"]
+[ext_resource type="Script" path="res://src/monster/monster.gd" id="1_yhpyk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ma1tt"]
 size = Vector2(128, 128)

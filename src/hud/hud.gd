@@ -1,10 +1,9 @@
 extends CanvasLayer
 
-var component_planting_mode = false
-var component_to_plant = null
-
 enum PLANT_COMPONENT_TYPE {LANTERN, PULSATOR}
 
+var component_planting_mode = false
+var component_to_plant = null
 var current_upgrades_choice
 
 @onready var all_upgrades = [
@@ -56,6 +55,12 @@ var current_upgrades_choice
 		'building': false,
 		'onetime': true,
 	},
+	{
+		'name': 'Add back bullet ability',
+		'function': get_node("../Player").enable_back_bullet,
+		'building': false,
+		'onetime': true,
+	},
 ]
 
 func _ready():
@@ -85,7 +90,7 @@ func update_level_label(level):
 	$LevelLabel.text = 'Level: ' + str(level)
 
 func update_crashes_label(crashes):
-	$CrashesLabel.text = 'Lost ships: ' + str(crashes)	
+	$CrashesLabel.text = 'Lost ships: ' + str(crashes)
 
 func update_ship_timeout_label(timeout):
 	$ShipTimeoutLabel.text = 'Ship timeout: ' + str(snappedf(timeout, 0.01)) + 's'
@@ -125,9 +130,6 @@ func enter_planting_mode(component):
 		$UpgradeSelection.hide()
 	
 func _input(event):
-	#local_click = get_viewport().canvas_transform.affine_inverse().xform(event.position)
-	#var tile = get_node("../NavigationRegion2D/TileMap").get_cell_atlas_coords(0, event.position)
-	#print(tile) event.local_postion
 	if component_planting_mode and event is InputEventMouseButton and is_on_tile_map():
 		var global_click_position = get_global_click_position(event)
 		match component_to_plant:

@@ -2,7 +2,10 @@ extends CharacterBody2D
 
 enum MONSTER_TYPE {SHIPPER, HOUSER}
 
+const HOUSER_TO_LIGHTHOUSE_DAMAGE = 10
 const SPEED = 60.0
+const HOUSER_COLOR = Color(0.849, 0.383, 0.241)
+const HOUSER_PROBABILITY = 0.4
 
 var monster_type
 var ship
@@ -10,13 +13,13 @@ var push_back_mode = false
 var push_back_direction = Vector2.ZERO
 
 func _ready():
-	monster_type = MONSTER_TYPE.values().pick_random()
+	monster_type = MONSTER_TYPE.SHIPPER if randf() > HOUSER_PROBABILITY else MONSTER_TYPE.HOUSER 
 	match monster_type:
 		MONSTER_TYPE.SHIPPER:
 			find_closes_ship()
 			$FindClosestShipTimer.start()
 		MONSTER_TYPE.HOUSER:
-			modulate = Color(0.849, 0.383, 0.241)
+			modulate = HOUSER_COLOR
 
 func _process(delta):
 	if rotation_degrees > 90 and rotation_degrees < 270:
@@ -42,7 +45,7 @@ func _physics_process(delta):
 			collider.queue_free()
 			queue_free()
 		if collider.is_in_group("lighthouse"):
-			get_parent().change_hp()
+			get_parent().change_hp(HOUSER_TO_LIGHTHOUSE_DAMAGE)
 			queue_free()
 				
 func get_destination():
