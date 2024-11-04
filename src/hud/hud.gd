@@ -56,6 +56,12 @@ var current_upgrades_choice
 		'onetime': true,
 	},
 	{
+		'name': 'Add rock piercing ability',
+		'function': get_node("../Player").enable_rock_piercing,
+		'building': false,
+		'onetime': true,
+	},
+	{
 		'name': 'Add back bullet ability',
 		'function': get_node("../Player").enable_back_bullet,
 		'building': false,

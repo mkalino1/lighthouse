@@ -19,6 +19,7 @@ var back_bullet = false
 #Player mobility
 var player_is_dashing = false
 var charge_ability = false
+var rock_piercing_ability = false
 
 func _input(event):
 	if event.is_action_pressed("shoot"):
@@ -71,6 +72,7 @@ func instantiate_bullet(is_back_bullet = false):
 	bullet.exp_for_killing_monster = EXP_FOR_KILLING_MONSTER
 	bullet.position = position
 	bullet.speed = bullet_speed if not is_back_bullet else -bullet_speed
+	bullet.rock_piercing = rock_piercing_ability
 	return bullet
 
 func _on_bullet_cooldown_timer_timeout():
@@ -87,6 +89,9 @@ func increase_bullet_quantity():
 	
 func enable_charge_ability():
 	charge_ability = true
+	
+func enable_rock_piercing():
+	rock_piercing_ability = true
 	
 func enable_back_bullet():
 	back_bullet = true
