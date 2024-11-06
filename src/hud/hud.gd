@@ -62,6 +62,12 @@ var current_upgrades_choice
 		'onetime': true,
 	},
 	{
+		'name': 'Add bullet bouncing ability',
+		'function': get_node("../Player").enable_bullet_bouncing,
+		'building': false,
+		'onetime': true,
+	},
+	{
 		'name': 'Add back bullet ability',
 		'function': get_node("../Player").enable_back_bullet,
 		'building': false,

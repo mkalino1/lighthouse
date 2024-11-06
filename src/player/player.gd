@@ -20,6 +20,7 @@ var back_bullet = false
 var player_is_dashing = false
 var charge_ability = false
 var rock_piercing_ability = false
+var bullet_bouncing_ability = false
 
 func _input(event):
 	if event.is_action_pressed("shoot"):
@@ -73,6 +74,7 @@ func instantiate_bullet(is_back_bullet = false):
 	bullet.position = position
 	bullet.speed = bullet_speed if not is_back_bullet else -bullet_speed
 	bullet.rock_piercing = rock_piercing_ability
+	bullet.bouncing = bullet_bouncing_ability
 	return bullet
 
 func _on_bullet_cooldown_timer_timeout():
@@ -93,5 +95,8 @@ func enable_charge_ability():
 func enable_rock_piercing():
 	rock_piercing_ability = true
 	
+func enable_bullet_bouncing():
+	bullet_bouncing_ability = true
+		
 func enable_back_bullet():
 	back_bullet = true
