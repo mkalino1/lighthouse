@@ -214,9 +214,18 @@ offset_bottom = 342.0
 text = "Game Over"
 label_settings = SubResource("LabelSettings_8jl4s")
 
+[node name="NewGameButton" type="Button" parent="GameOverLabel"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 86.0
+offset_right = 256.0
+offset_bottom = 117.0
+text = "New game"
+
 [connection signal="button_up" from="UpgradeSelection/UpgradeOption1" to="." method="_on_upgrade_option_1_button_up"]
 [connection signal="button_up" from="UpgradeSelection/UpgradeOption2" to="." method="_on_upgrade_option_2_button_up"]
 [connection signal="button_up" from="UpgradeSelection/UpgradeOption3" to="." method="_on_upgrade_option_3_button_up"]
 [connection signal="button_up" from="UpgradeSelection/UpgradeOption4" to="." method="_on_upgrade_option_4_button_up"]
 [connection signal="button_up" from="UpgradeSelection/UpgradeOption5" to="." method="_on_upgrade_option_5_button_up"]
 [connection signal="button_up" from="UpgradeSelection/UpgradeOption6" to="." method="_on_upgrade_option_6_button_up"]
+[connection signal="button_up" from="GameOverLabel/NewGameButton" to="." method="_on_new_game_button_button_up"]

@@ -164,3 +164,9 @@ func is_on_tile_map():
 		#var tile = get_node("../NavigationRegion2D/TileMap").get_cell_source_id(get_node("../NavigationRegion2D/TileMap").world_to_map(click_position))
 	#var tile = get_node("../NavigationRegion2D/TileMap").get_cell_atlas_coords(0, click_position)
 	return data != -1
+
+func _on_new_game_button_button_up():
+	$GameOverLabel.hide()
+	get_parent().initialize_game()
+	get_tree().paused = false
+	

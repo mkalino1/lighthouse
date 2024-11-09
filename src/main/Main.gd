@@ -21,6 +21,26 @@ var max_ship_count = 1
 var max_monster_count = 8
 var lighthouse_hp = 30
 
+func initialize_game():
+	exp = 0
+	level = 1
+	wave = 1
+	wave_pause = false
+	crashes = 0
+	max_ship_count = 1
+	max_monster_count = 8
+	lighthouse_hp = 30
+	$Timers/ShipSpawnTimer.wait_time *= 2
+	$Timers/MutaliskSpawnTimer.wait_time *= 1
+	$HUD.update_hp_label(lighthouse_hp)
+	$HUD.update_ship_timeout_label($Timers/ShipSpawnTimer.wait_time)
+	$HUD.update_level_label(level)
+	$HUD.update_exp_label(exp, exp_per_level(level))
+	$HUD.update_crashes_label(crashes)
+	$HUD.update_wave_label(wave)
+	get_tree().call_group("ships", "queue_free")
+	get_tree().call_group("monsters", "queue_free")
+
 func change_hp(value, add = false):
 	lighthouse_hp = lighthouse_hp + value if add else lighthouse_hp - value
 	$HUD.update_hp_label(lighthouse_hp)
