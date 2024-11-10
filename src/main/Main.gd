@@ -19,9 +19,13 @@ var wave_pause = false
 var crashes = 0
 var max_ship_count = 1
 var max_monster_count = 8
-var lighthouse_hp = 30
 
-func initialize_game():
+func restart_game():
+	get_tree().call_group("ships", "queue_free")
+	get_tree().call_group("monsters", "queue_free")
+	get_tree().call_group("pulsators", "queue_free")
+	get_tree().call_group("spawned_lanterns", "queue_free")
+	
 	exp = 0
 	level = 1
 	wave = 1
@@ -29,22 +33,35 @@ func initialize_game():
 	crashes = 0
 	max_ship_count = 1
 	max_monster_count = 8
-	lighthouse_hp = 30
+	$Lighthouse.lighthouse_hp = 30
+	$Player.player_hp = 30
 	$Timers/ShipSpawnTimer.wait_time *= 2
 	$Timers/MutaliskSpawnTimer.wait_time *= 1
-	$HUD.update_hp_label(lighthouse_hp)
+	
+	$HUD.update_lighthouse_hp_label($Lighthouse.lighthouse_hp)
+	$HUD.update_player_hp_label($Player.player_hp)
 	$HUD.update_ship_timeout_label($Timers/ShipSpawnTimer.wait_time)
 	$HUD.update_level_label(level)
 	$HUD.update_exp_label(exp, exp_per_level(level))
 	$HUD.update_crashes_label(crashes)
 	$HUD.update_wave_label(wave)
-	get_tree().call_group("ships", "queue_free")
-	get_tree().call_group("monsters", "queue_free")
+	
+	disable_all_abilities()
+	
+func disable_all_abilities():
+	#TODO
+	pass
 
-func change_hp(value, add = false):
-	lighthouse_hp = lighthouse_hp + value if add else lighthouse_hp - value
-	$HUD.update_hp_label(lighthouse_hp)
-	if lighthouse_hp <= 0:
+func change_lighthouse_hp(value, add = false):
+	$Lighthouse.lighthouse_hp = $Lighthouse.lighthouse_hp + value if add else $Lighthouse.lighthouse_hp - value
+	$HUD.update_lighthouse_hp_label($Lighthouse.lighthouse_hp)
+	if $Lighthouse.lighthouse_hp <= 0:
+		$HUD.show_game_over_screen()
+		
+func change_player_hp(value, add = false):
+	$Player.player_hp = $Player.player_hp + value if add else $Player.player_hp - value
+	$HUD.update_player_hp_label($Player.player_hp)
+	if $Player.player_hp <= 0:
 		$HUD.show_game_over_screen()
 
 func add_exp(exp_to_add):
@@ -95,6 +112,7 @@ func spawn_lantern(position):
 	lantern.scale = Vector2(0.5, 0.5)
 	lantern.position = position
 	lantern.placed_on_ground = true
+	lantern.add_to_group('spawned_lanterns')
 	add_child(lantern)
 	
 func spawn_pulsator(position):
@@ -118,7 +136,7 @@ func _on_wave_pause_timer_timeout():
 	$Timers/WaveTimer.start()
 
 func _on_out_of_bounds_body_exited(body):
-	if body.is_in_group('ships'):
+	if body.is_in_group('ships') and not body.is_dead:
 		add_exp(SHIP_SUCCESS_EXP)
 	body.queue_free()
 

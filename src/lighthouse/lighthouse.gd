@@ -14,6 +14,7 @@ var is_rotation_direction_change_desired = false;
 var rotation_change_slowdown = false
 var offcenter_angle = OFFCENTER_ANGLE_INITIAL
 var inital_light_beam_position
+var lighthouse_hp = 30
 
 func _ready():
 	inital_light_beam_position = $RotationPoint/LightBeam.position;

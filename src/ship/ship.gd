@@ -7,6 +7,7 @@ const NON_LIGHTENED_MODIFIER = 0.3
 var movement_target_position = Vector2.ZERO
 var lighted = false
 var wrecked = false
+var is_dead = false
 
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 

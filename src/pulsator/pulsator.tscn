@@ -9,7 +9,7 @@ radius = 192.167
 [sub_resource type="CircleShape2D" id="CircleShape2D_s6shf"]
 radius = 96.3328
 
-[node name="Pulsator" type="Area2D"]
+[node name="Pulsator" type="Area2D" groups=["pulsators"]]
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("1_2mt0g")

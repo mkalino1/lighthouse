@@ -92,8 +92,11 @@ func show_game_over_screen():
 	get_tree().paused = true
 	$GameOverLabel.show()
 
-func update_hp_label(hp):
-	$HpLabel.text = 'HP: ' + str(hp) + '/' + str(30)
+func update_lighthouse_hp_label(hp):
+	$LighthouseHpLabel.text = 'HP: ' + str(hp) + '/' + str(30)
+
+func update_player_hp_label(hp):
+	$PlayerHpLabel.text = 'HP: ' + str(hp) + '/' + str(30)
 
 func update_exp_label(exp, exp_level):
 	$ExpLabel.text = str(exp) + '/' + str(exp_level)
@@ -167,6 +170,6 @@ func is_on_tile_map():
 
 func _on_new_game_button_button_up():
 	$GameOverLabel.hide()
-	get_parent().initialize_game()
+	get_parent().restart_game()
 	get_tree().paused = false
 	

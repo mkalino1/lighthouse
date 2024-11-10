@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 enum MONSTER_TYPE {SHIPPER, HOUSER}
 
-const HOUSER_TO_LIGHTHOUSE_DAMAGE = 10
+const MONSTER_DAMAGE = 10
 const SPEED = 60.0
 const HOUSER_COLOR = Color(0.849, 0.383, 0.241)
 const HOUSER_PROBABILITY = 0.4
@@ -11,6 +11,7 @@ var monster_type
 var ship
 var push_back_mode = false
 var push_back_direction = Vector2.ZERO
+var is_dead = false
 
 func _ready():
 	monster_type = MONSTER_TYPE.SHIPPER if randf() > HOUSER_PROBABILITY else MONSTER_TYPE.HOUSER 
@@ -28,6 +29,8 @@ func _process(delta):
 		$Sprite2D.flip_v = false
 
 func _physics_process(delta):
+	if is_dead:
+		return
 	var destination = get_destination()
 	if not destination:
 		return
@@ -45,8 +48,15 @@ func _physics_process(delta):
 			collider.queue_free()
 			queue_free()
 		if collider.is_in_group("lighthouse"):
-			get_parent().change_hp(HOUSER_TO_LIGHTHOUSE_DAMAGE)
+			get_parent().change_lighthouse_hp(MONSTER_DAMAGE)
 			queue_free()
+		if collider.is_in_group("player"):
+			is_dead = true
+			queue_free()
+			if (collider.player_is_dashing and collider.charge_ability) or collider.is_invincible:
+				return
+			get_parent().change_player_hp(MONSTER_DAMAGE)
+			
 				
 func get_destination():
 	match monster_type:

@@ -16,7 +16,12 @@ font_color = Color(0.890196, 0.109804, 0.152941, 1)
 process_mode = 2
 script = ExtResource("1_4w35r")
 
-[node name="HpLabel" type="Label" parent="."]
+[node name="PlayerHpLabel" type="Label" parent="."]
+offset_right = 74.0
+offset_bottom = 23.0
+text = "HP: 30/30"
+
+[node name="LighthouseHpLabel" type="Label" parent="."]
 offset_left = 552.0
 offset_right = 626.0
 offset_bottom = 23.0

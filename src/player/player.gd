@@ -18,9 +18,12 @@ var bullet_quantity = 1
 var back_bullet = false
 #Player mobility
 var player_is_dashing = false
-var charge_ability = false
+var charge_ability = true
 var rock_piercing_ability = false
 var bullet_bouncing_ability = false
+
+var player_hp = 30
+var is_invincible = false
 
 func _input(event):
 	if event.is_action_pressed("shoot"):
@@ -48,12 +51,26 @@ func _physics_process(delta):
 			velocity = velocity * PLAYER_SPEED
 		
 	var collided = move_and_slide()
-	if collided and charge_ability and player_is_dashing:
+	if collided:
 		var collision = get_last_slide_collision()
 		var collider = collision.get_collider()
-		if collider.is_in_group("monsters") or collider.is_in_group("ships"):
-			collider.queue_free()
-			get_parent().add_exp(EXP_FOR_KILLING_MONSTER)
+		#charging
+		if charge_ability and player_is_dashing:
+			if collider.is_in_group("monsters"):
+				collider.queue_free()
+				get_parent().add_exp(EXP_FOR_KILLING_MONSTER)
+			if collider.is_in_group("ships"):
+				collider.is_dead = true
+				collider.queue_free()
+		#standard collision
+		else:
+			if collider.is_in_group("monsters") and not collider.is_dead:
+				collider.is_dead = true
+				collider.queue_free()
+				if not is_invincible:
+					get_parent().change_player_hp(collider.MONSTER_DAMAGE)
+				else:
+					get_parent().add_exp(EXP_FOR_KILLING_MONSTER)
 
 func shoot():
 	if bullet_cooldown_block:
@@ -82,6 +99,12 @@ func _on_bullet_cooldown_timer_timeout():
 
 func _on_dash_timer_timeout():
 	player_is_dashing = false
+	if charge_ability:
+		is_invincible = true
+		$DashInvicibilityTimer.start()
+	
+func _on_dash_invicibility_timer_timeout():
+	is_invincible = false
 	
 func increase_bullet_speed():
 	bullet_speed += BULLET_SPEED_INCREMENT

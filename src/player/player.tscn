@@ -7,7 +7,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_gw4v6"]
 radius = 24.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 32
 collision_mask = 7
 script = ExtResource("1_dpbys")
@@ -31,6 +31,11 @@ one_shot = true
 
 [node name="DashTimer" type="Timer" parent="." groups=["player"]]
 wait_time = 0.2
+one_shot = true
+
+[node name="DashInvicibilityTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.12, 1.12)
@@ -42,3 +47,4 @@ editor_draw_limits = true
 
 [connection signal="timeout" from="BulletCooldownTimer" to="." method="_on_bullet_cooldown_timer_timeout"]
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="DashInvicibilityTimer" to="." method="_on_dash_invicibility_timer_timeout"]
