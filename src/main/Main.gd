@@ -25,6 +25,7 @@ func restart_game():
 	get_tree().call_group("monsters", "queue_free")
 	get_tree().call_group("pulsators", "queue_free")
 	get_tree().call_group("spawned_lanterns", "queue_free")
+	get_tree().call_group("exp_coins", "queue_free")
 	
 	exp = 0
 	level = 1
@@ -45,12 +46,6 @@ func restart_game():
 	$HUD.update_exp_label(exp, exp_per_level(level))
 	$HUD.update_crashes_label(crashes)
 	$HUD.update_wave_label(wave)
-	
-	disable_all_abilities()
-	
-func disable_all_abilities():
-	#TODO
-	pass
 
 func change_lighthouse_hp(value, add = false):
 	$Lighthouse.lighthouse_hp = $Lighthouse.lighthouse_hp + value if add else $Lighthouse.lighthouse_hp - value

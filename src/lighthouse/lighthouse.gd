@@ -7,8 +7,9 @@ const ANGLE_SPEED_INCREMENT = 1
 const OFFCENTER_ANGLE_INITIAL = 10
 const OFFCENTER_ANGLE_MAX = 10
 const OFFCENTER_ANGLE_MIN = 3
+const ANGLE_SPEED_INITIAL = 1
 
-var angle_speed = 1
+var angle_speed = ANGLE_SPEED_INITIAL
 var is_rotation_direction_changed = false;
 var is_rotation_direction_change_desired = false;
 var rotation_change_slowdown = false
@@ -53,13 +54,25 @@ func increase_beam_scale():
 	for child in $RotationPoint.get_children():
 		if child.is_in_group('beams'):
 			child.increase_scale(BEAM_SCALE_INCREMENT)
-
+			
+func reset_beam_scale():
+	$RotationPoint/LightBeam.reset_scale()
+			
 func increase_angle_speed():
 	angle_speed += ANGLE_SPEED_INCREMENT
+			
+func reset_angle_speed():
+	angle_speed = ANGLE_SPEED_INITIAL
 	
 func add_second_beam():
 	var second_beam = light_beam_scene.instantiate()
 	var first_beam = $RotationPoint/LightBeam
 	second_beam.position = -first_beam.position
 	second_beam.scale = first_beam.scale
+	second_beam.is_second = true
 	$RotationPoint.add_child(second_beam)
+	
+func reset_second_beam():
+	for child in $RotationPoint.get_children():
+		if child.is_in_group('beams') and child.is_second:
+			child.queue_free()

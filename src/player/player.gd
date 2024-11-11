@@ -10,15 +10,16 @@ const EXP_FOR_KILLING_MONSTER = 20
 const BULLET_SPPED_INITIAL = 800
 const BULLET_SPEED_INCREMENT = 400
 const BULLET_QUANTITY_INCREMENT = 1
+const BULLET_QUANTITY_INITIAL = 1
 
 #Bullets
 var bullet_cooldown_block = false
 var bullet_speed = BULLET_SPPED_INITIAL
-var bullet_quantity = 1
+var bullet_quantity = BULLET_QUANTITY_INITIAL
 var back_bullet = false
 #Player mobility
 var player_is_dashing = false
-var charge_ability = true
+var charge_ability = false
 var rock_piercing_ability = false
 var bullet_bouncing_ability = false
 
@@ -109,17 +110,35 @@ func _on_dash_invicibility_timer_timeout():
 func increase_bullet_speed():
 	bullet_speed += BULLET_SPEED_INCREMENT
 	
+func reset_bullet_speed():
+	bullet_speed = BULLET_SPPED_INITIAL
+	
 func increase_bullet_quantity():
 	bullet_quantity += BULLET_QUANTITY_INCREMENT
+	
+func reset_bullet_quantity():
+	bullet_quantity = BULLET_QUANTITY_INITIAL
 	
 func enable_charge_ability():
 	charge_ability = true
 	
+func reset_charge_ability():
+	charge_ability = false
+	
 func enable_rock_piercing():
 	rock_piercing_ability = true
 	
+func reset_rock_piercing():
+	rock_piercing_ability = false
+	
 func enable_bullet_bouncing():
 	bullet_bouncing_ability = true
+	
+func reset_bullet_bouncing():
+	bullet_bouncing_ability = false
 		
 func enable_back_bullet():
 	back_bullet = true
+	
+func reset_back_bullet():
+	back_bullet = false

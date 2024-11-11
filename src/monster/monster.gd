@@ -45,6 +45,7 @@ func _physics_process(delta):
 		var collider = collision.get_collider()
 		if collider.is_in_group("ships"):
 			get_parent().add_crash()
+			collider.is_dead = true
 			collider.queue_free()
 			queue_free()
 		if collider.is_in_group("lighthouse"):

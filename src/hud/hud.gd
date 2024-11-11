@@ -10,78 +10,91 @@ var current_upgrades_choice
 	{
 		'name': 'Increase beam scale',
 		'function': get_node("../Lighthouse").increase_beam_scale,
+		'reset': get_node("../Lighthouse").reset_beam_scale,
 		'building': false,
 		'onetime': false,
 	},
 	{
 		'name': 'Increase angle speed',
 		'function': get_node("../Lighthouse").increase_angle_speed,
+		'reset': get_node("../Lighthouse").reset_angle_speed,
 		'building': false,
 		'onetime': false,
 	},
 	{
 		'name': 'Increase bullet speed',
 		'function': get_node("../Player").increase_bullet_speed,
+		'reset': get_node("../Player").reset_bullet_speed,
 		'building': false,
 		'onetime': false,
 	},
 	{
 		'name': 'Increase bullet quantity',
 		'function': get_node("../Player").increase_bullet_quantity,
+		'reset': get_node("../Player").reset_bullet_quantity,
 		'building': false,
 		'onetime': false,
 	},
 	{
 		'name': 'Plant lantern',
 		'function': enter_planting_mode(PLANT_COMPONENT_TYPE.LANTERN),
+		'reset': null,
 		'building': true,
 		'onetime': false,
 	},
 	{
 		'name': 'Plant pulsator',
 		'function': enter_planting_mode(PLANT_COMPONENT_TYPE.PULSATOR),
+		'reset': null,
 		'building': true,
 		'onetime': false,
 	},
 	{
 		'name': 'Add second beam',
 		'function': get_node("../Lighthouse").add_second_beam,
+		'reset': get_node("../Lighthouse").reset_second_beam,
 		'building': false,
 		'onetime': true,
 	},
 	{
 		'name': 'Add charge ability',
 		'function': get_node("../Player").enable_charge_ability,
+		'reset': get_node("../Player").reset_charge_ability,
 		'building': false,
 		'onetime': true,
 	},
 	{
 		'name': 'Add rock piercing ability',
 		'function': get_node("../Player").enable_rock_piercing,
+		'reset': get_node("../Player").reset_rock_piercing,
 		'building': false,
 		'onetime': true,
 	},
 	{
 		'name': 'Add bullet bouncing ability',
 		'function': get_node("../Player").enable_bullet_bouncing,
+		'reset': get_node("../Player").reset_bullet_bouncing,
 		'building': false,
 		'onetime': true,
 	},
 	{
 		'name': 'Add back bullet ability',
 		'function': get_node("../Player").enable_back_bullet,
+		'reset': get_node("../Player").reset_back_bullet,
 		'building': false,
 		'onetime': true,
 	},
 ]
+
+@onready var all_available_upgrades = all_upgrades.duplicate(true)
 
 func _ready():
 	show_upgrade_selection()
 	
 func show_upgrade_selection():
 	get_tree().paused = true
-	all_upgrades.shuffle()
-	current_upgrades_choice = all_upgrades.slice(0, 4)
+	all_available_upgrades.shuffle()
+	current_upgrades_choice = all_available_upgrades.slice(0, 4)
 	$UpgradeSelection/UpgradeOption1.text = current_upgrades_choice[0].name
 	$UpgradeSelection/UpgradeOption2.text = current_upgrades_choice[1].name
 	$UpgradeSelection/UpgradeOption3.text = current_upgrades_choice[2].name
@@ -132,7 +145,7 @@ func handle_upgrade_click(index):
 	if not upgrade.building:
 		close_upgrade_selection()
 	if upgrade.onetime:
-		all_upgrades.remove_at(all_upgrades.find(upgrade))
+		all_available_upgrades.remove_at(all_available_upgrades.find(upgrade))
 
 func close_upgrade_selection():
 	get_tree().paused = false
@@ -171,5 +184,8 @@ func is_on_tile_map():
 func _on_new_game_button_button_up():
 	$GameOverLabel.hide()
 	get_parent().restart_game()
+	for ability in all_upgrades:
+		if ability.reset:
+			ability.reset.call()
 	get_tree().paused = false
 	
