@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 enum MONSTER_TYPE {SHIPPER, HOUSER}
 
-const MONSTER_DAMAGE = 10
+const MONSTER_DAMAGE = 1
 const SPEED = 60.0
 const HOUSER_COLOR = Color(0.849, 0.383, 0.241)
 const HOUSER_PROBABILITY = 0.4

@@ -20,12 +20,17 @@ var crashes = 0
 var max_ship_count = 1
 var max_monster_count = 8
 
+func _ready():
+	$HUD.set_max_hearts($Player.player_hp)
+	$HUD.update_exp_label(exp, exp_per_level(level))
+
 func restart_game():
-	get_tree().call_group("ships", "queue_free")
+	get_tree().call_group("ships", "kill")
 	get_tree().call_group("monsters", "queue_free")
 	get_tree().call_group("pulsators", "queue_free")
 	get_tree().call_group("spawned_lanterns", "queue_free")
 	get_tree().call_group("exp_coins", "queue_free")
+	get_tree().call_group("bullets", "queue_free")
 	
 	exp = 0
 	level = 1
@@ -34,13 +39,14 @@ func restart_game():
 	crashes = 0
 	max_ship_count = 1
 	max_monster_count = 8
-	$Lighthouse.lighthouse_hp = 30
-	$Player.player_hp = 30
+	$Lighthouse.lighthouse_hp = 10
+	$Player.player_hp = 3
 	$Timers/ShipSpawnTimer.wait_time *= 2
 	$Timers/MutaliskSpawnTimer.wait_time *= 1
 	
 	$HUD.update_lighthouse_hp_label($Lighthouse.lighthouse_hp)
-	$HUD.update_player_hp_label($Player.player_hp)
+	$HUD.update_current_hearts($Player.player_hp)
+	$HUD.set_max_hearts($Player.player_hp)
 	$HUD.update_ship_timeout_label($Timers/ShipSpawnTimer.wait_time)
 	$HUD.update_level_label(level)
 	$HUD.update_exp_label(exp, exp_per_level(level))
@@ -55,7 +61,7 @@ func change_lighthouse_hp(value, add = false):
 		
 func change_player_hp(value, add = false):
 	$Player.player_hp = $Player.player_hp + value if add else $Player.player_hp - value
-	$HUD.update_player_hp_label($Player.player_hp)
+	$HUD.update_current_hearts($Player.player_hp)
 	if $Player.player_hp <= 0:
 		$HUD.show_game_over_screen()
 

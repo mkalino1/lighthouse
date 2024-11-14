@@ -49,6 +49,7 @@ func light_exited():
 func _on_light_up_timer_timeout():
 	modulate = Color.WHITE
 	lighted = false
-
-func _on_crashed_timer_timeout():
+	
+func kill():
+	is_dead = true
 	queue_free()

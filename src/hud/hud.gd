@@ -106,10 +106,13 @@ func show_game_over_screen():
 	$GameOverLabel.show()
 
 func update_lighthouse_hp_label(hp):
-	$LighthouseHpLabel.text = 'HP: ' + str(hp) + '/' + str(30)
+	$LighthouseHpLabel.text = 'HP: ' + str(hp) + '/' + str(10)
 
-func update_player_hp_label(hp):
-	$PlayerHpLabel.text = 'HP: ' + str(hp) + '/' + str(30)
+func update_current_hearts(hp):
+	$HeartsContainer.set_current_hearts(hp)
+	
+func set_max_hearts(hearts_num):
+	$HeartsContainer.set_max_hearts(hearts_num)
 
 func update_exp_label(exp, exp_level):
 	$ExpLabel.text = str(exp) + '/' + str(exp_level)

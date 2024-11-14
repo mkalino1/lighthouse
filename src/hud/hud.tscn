@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://c01h46ht3earx"]
+[gd_scene load_steps=5 format=3 uid="uid://c01h46ht3earx"]
 
 [ext_resource type="Script" path="res://src/hud/hud.gd" id="1_4w35r"]
+[ext_resource type="PackedScene" uid="uid://daxdd6604yf0v" path="res://src/hearts_container/hearts_container.tscn" id="3_n5luf"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_nd2vw"]
 font_size = 20
@@ -14,16 +15,11 @@ font_color = Color(0.890196, 0.109804, 0.152941, 1)
 process_mode = 2
 script = ExtResource("1_4w35r")
 
-[node name="PlayerHpLabel" type="Label" parent="."]
-offset_right = 74.0
-offset_bottom = 23.0
-text = "HP: 30/30"
-
 [node name="LighthouseHpLabel" type="Label" parent="."]
 offset_left = 552.0
 offset_right = 626.0
 offset_bottom = 23.0
-text = "HP: 30/30"
+text = "HP: 10/10"
 
 [node name="ExpLabel" type="Label" parent="."]
 offset_left = 1056.0
@@ -87,16 +83,15 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="WaveLabel" type="Label" parent="."]
-anchors_preset = 3
-anchor_left = 1.0
+anchors_preset = 7
+anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -1152.0
-offset_top = -648.0
-offset_right = -1027.0
-offset_bottom = -625.0
-grow_horizontal = 0
+offset_left = -62.5
+offset_top = -23.0
+offset_right = 62.5
+grow_horizontal = 2
 grow_vertical = 0
 text = "Wave: 1"
 horizontal_alignment = 1
@@ -209,10 +204,18 @@ text = "Double light beam"
 
 [node name="GameOverLabel" type="Label" parent="."]
 visible = false
-offset_left = 416.0
-offset_top = 256.0
-offset_right = 753.0
-offset_bottom = 342.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -168.5
+offset_top = -43.0
+offset_right = 168.5
+offset_bottom = 43.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
 text = "Game Over"
 label_settings = SubResource("LabelSettings_8jl4s")
 
@@ -223,6 +226,9 @@ offset_top = 86.0
 offset_right = 256.0
 offset_bottom = 117.0
 text = "New game"
+
+[node name="HeartsContainer" parent="." instance=ExtResource("3_n5luf")]
+scale = Vector2(3, 3)
 
 [connection signal="button_up" from="UpgradeSelection/UpgradeOption1" to="." method="_on_upgrade_option_1_button_up"]
 [connection signal="button_up" from="UpgradeSelection/UpgradeOption2" to="." method="_on_upgrade_option_2_button_up"]

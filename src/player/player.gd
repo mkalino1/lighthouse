@@ -23,7 +23,7 @@ var charge_ability = false
 var rock_piercing_ability = false
 var bullet_bouncing_ability = false
 
-var player_hp = 30
+var player_hp = 3
 var is_invincible = false
 
 func _input(event):
