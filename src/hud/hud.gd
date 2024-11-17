@@ -84,6 +84,20 @@ var current_upgrades_choice
 		'building': false,
 		'onetime': true,
 	},
+	{
+		'name': 'Add max heart',
+		'function': add_max_heart,
+		'reset': null,
+		'building': false,
+		'onetime': false,
+	},
+	{
+		'name': 'Heal two hearts',
+		'function': heal_two_hearts,
+		'reset': null,
+		'building': false,
+		'onetime': false,
+	},
 ]
 
 @onready var all_available_upgrades = all_upgrades.duplicate(true)
@@ -192,3 +206,10 @@ func _on_new_game_button_button_up():
 			ability.reset.call()
 	get_tree().paused = false
 	
+func add_max_heart():
+	get_node("../Player").add_max_heart()
+	$HeartsContainer.add_max_heart()
+
+func heal_two_hearts():
+	get_node("../Player").heal_two_hearts()
+	update_current_hearts(get_node("../Player").player_hp)

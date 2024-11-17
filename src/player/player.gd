@@ -23,7 +23,8 @@ var charge_ability = false
 var rock_piercing_ability = false
 var bullet_bouncing_ability = false
 
-var player_hp = 3
+var player_hp_max = 3
+var player_hp = player_hp_max
 var is_invincible = false
 
 func _input(event):
@@ -142,3 +143,10 @@ func enable_back_bullet():
 	
 func reset_back_bullet():
 	back_bullet = false
+	
+func heal_two_hearts():
+	player_hp = clamp(player_hp + 2, 0, player_hp_max);
+	
+func add_max_heart():
+	player_hp += 1
+	player_hp_max += 1

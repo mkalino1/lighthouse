@@ -9,6 +9,11 @@ func set_max_hearts(num):
 		var heart_instance = heart_scene.instantiate()
 		add_child(heart_instance)
 		
+func add_max_heart():
+	var heart_instance = heart_scene.instantiate()
+	add_child(heart_instance)
+	move_child(heart_instance, 0)
+
 func set_current_hearts(num):
 	var tmp = num
 	for child in get_children():

@@ -41,8 +41,8 @@ func restart_game():
 	max_monster_count = 8
 	$Lighthouse.lighthouse_hp = 10
 	$Player.player_hp = 3
-	$Timers/ShipSpawnTimer.wait_time *= 2
-	$Timers/MutaliskSpawnTimer.wait_time *= 1
+	$Timers/ShipSpawnTimer.wait_time = 2
+	$Timers/MutaliskSpawnTimer.wait_time = 1
 	
 	$HUD.update_lighthouse_hp_label($Lighthouse.lighthouse_hp)
 	$HUD.update_current_hearts($Player.player_hp)
