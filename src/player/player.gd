@@ -74,6 +74,9 @@ func _physics_process(delta):
 				else:
 					get_parent().add_exp(EXP_FOR_KILLING_MONSTER)
 
+func shake_camera():
+	$PlayerCamera.shake_camera()
+
 func shoot():
 	if bullet_cooldown_block:
 		return

@@ -64,6 +64,8 @@ func change_player_hp(value, add = false):
 	$HUD.update_current_hearts($Player.player_hp)
 	if $Player.player_hp <= 0:
 		$HUD.show_game_over_screen()
+	else:
+		$Player.shake_camera()
 
 func add_exp(exp_to_add):
 	exp += exp_to_add

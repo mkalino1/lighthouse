@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bg0eco355xata"]
+[gd_scene load_steps=6 format=3 uid="uid://bg0eco355xata"]
 
 [ext_resource type="Script" path="res://src/player/player.gd" id="1_dpbys"]
 [ext_resource type="Texture2D" uid="uid://vg88oym2q14n" path="res://images/playerGreen_up2.png" id="2_djdck"]
 [ext_resource type="PackedScene" uid="uid://b4r4u3tswv6lk" path="res://src/bullet/bullet.tscn" id="2_xprj7"]
+[ext_resource type="Script" path="res://src/player/PlayerCamera.gd" id="4_mjymy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gw4v6"]
 radius = 24.0
@@ -37,13 +38,14 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="PlayerCamera" type="Camera2D" parent="."]
 zoom = Vector2(1.12, 1.12)
 limit_left = 0
 limit_top = 0
 limit_right = 1920
 limit_bottom = 1080
 editor_draw_limits = true
+script = ExtResource("4_mjymy")
 
 [connection signal="timeout" from="BulletCooldownTimer" to="." method="_on_bullet_cooldown_timer_timeout"]
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
