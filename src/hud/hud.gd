@@ -8,91 +8,104 @@ var current_upgrades_choice
 
 @onready var all_upgrades = [
 	{
-		'name': 'Increase beam scale',
+		'name': 'More light',
+		'desc': 'Increase the area of the light beam',
 		'function': get_node("../Lighthouse").increase_beam_scale,
 		'reset': get_node("../Lighthouse").reset_beam_scale,
 		'building': false,
 		'onetime': false,
 	},
 	{
-		'name': 'Increase angle speed',
+		'name': 'Speedy gears',
+		'desc': 'Increase the speed of the lighthouse rotation',
 		'function': get_node("../Lighthouse").increase_angle_speed,
 		'reset': get_node("../Lighthouse").reset_angle_speed,
 		'building': false,
 		'onetime': false,
 	},
 	{
-		'name': 'Increase bullet speed',
+		'name': 'Speedy bullets',
+		'desc': 'Increase the speed of bullets',
 		'function': get_node("../Player").increase_bullet_speed,
 		'reset': get_node("../Player").reset_bullet_speed,
 		'building': false,
 		'onetime': false,
 	},
 	{
-		'name': 'Increase bullet quantity',
+		'name': 'Bullet overload',
+		'desc': 'Shoot more bullets at the same time',
 		'function': get_node("../Player").increase_bullet_quantity,
 		'reset': get_node("../Player").reset_bullet_quantity,
 		'building': false,
 		'onetime': false,
 	},
 	{
-		'name': 'Plant lantern',
+		'name': 'Mini lantern',
+		'desc': 'Click any rock to place a lantern there',
 		'function': enter_planting_mode(PLANT_COMPONENT_TYPE.LANTERN),
 		'reset': null,
 		'building': true,
 		'onetime': false,
 	},
 	{
-		'name': 'Plant pulsator',
+		'name': 'Pulsator',
+		'desc': 'Click any rock to place a pulsator that is pushing back monsters',
 		'function': enter_planting_mode(PLANT_COMPONENT_TYPE.PULSATOR),
 		'reset': null,
 		'building': true,
 		'onetime': false,
 	},
 	{
-		'name': 'Add second beam',
+		'name': 'Double light',
+		'desc': 'Make lighhouse emit light beam from two sides',
 		'function': get_node("../Lighthouse").add_second_beam,
 		'reset': get_node("../Lighthouse").reset_second_beam,
 		'building': false,
 		'onetime': true,
 	},
 	{
-		'name': 'Add charge ability',
+		'name': 'Charge',
+		'desc': 'Kill monsters during dash',
 		'function': get_node("../Player").enable_charge_ability,
 		'reset': get_node("../Player").reset_charge_ability,
 		'building': false,
 		'onetime': true,
 	},
 	{
-		'name': 'Add rock piercing ability',
+		'name': 'Rock piercing',
+		'desc': 'Your bullets will pierce rocks',
 		'function': get_node("../Player").enable_rock_piercing,
 		'reset': get_node("../Player").reset_rock_piercing,
 		'building': false,
 		'onetime': true,
 	},
 	{
-		'name': 'Add bullet bouncing ability',
+		'name': 'Bouncing bullets',
+		'desc': 'Your bullets will bounce off rocks',
 		'function': get_node("../Player").enable_bullet_bouncing,
 		'reset': get_node("../Player").reset_bullet_bouncing,
 		'building': false,
 		'onetime': true,
 	},
 	{
-		'name': 'Add back bullet ability',
+		'name': 'Back bullet',
+		'desc': 'Shoot extra bullet from your back',
 		'function': get_node("../Player").enable_back_bullet,
 		'reset': get_node("../Player").reset_back_bullet,
 		'building': false,
 		'onetime': true,
 	},
 	{
-		'name': 'Add max heart',
+		'name': 'Extra heart',
+		'desc': 'Increase the max hearts without healing current damage',
 		'function': add_max_heart,
 		'reset': null,
 		'building': false,
 		'onetime': false,
 	},
 	{
-		'name': 'Heal two hearts',
+		'name': 'Heal',
+		'desc': 'Heal two points of damage',
 		'function': heal_two_hearts,
 		'reset': null,
 		'building': false,
@@ -109,10 +122,10 @@ func show_upgrade_selection():
 	get_tree().paused = true
 	all_available_upgrades.shuffle()
 	current_upgrades_choice = all_available_upgrades.slice(0, 4)
-	$UpgradeSelection/UpgradeOption1.text = current_upgrades_choice[0].name
-	$UpgradeSelection/UpgradeOption2.text = current_upgrades_choice[1].name
-	$UpgradeSelection/UpgradeOption3.text = current_upgrades_choice[2].name
-	$UpgradeSelection/UpgradeOption4.text = current_upgrades_choice[3].name
+	var index = 0
+	for child in $UpgradeSelection/Upgrades.get_children():
+		child.set_text(current_upgrades_choice[index])
+		index += 1
 	$UpgradeSelection.show()
 
 func show_game_over_screen():
